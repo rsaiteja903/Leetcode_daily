@@ -1,0 +1,32 @@
+// The "Two Sum problem "
+// Method -1 : Using the brute force method: you can do the two for loops and compare the elements and find the solution
+code:
+
+public int[] twoSum(int[] nums, int target){
+
+    for(int i =0; i<nums.length-1;i++){
+      for(int j=i+1;j<nums.length;j++){
+          if(nums[i]+nums[j] == target){
+                return new int[]{i,j};
+          }
+      }
+    }
+  return new int[]{};
+}
+
+
+
+
+//Method-2: using the HashMap : you create an empty hashmap and then in the for loop , while traversing the through the array you check for the complement of the number in the map, if i find the complement in the 
+map we will return the indices and if not found in the map we append the complement and its index to the map and continuse the loo[.
+
+public int[] twoSum(int[] nums, int target){
+    Hasmap<Integer, Integer> result = new Hashmap<>();
+    for(int i =0;i<nums.legth-1;i++){
+      int complement = target - nums[i];
+      if(result.containsKey(complement)){
+          new int[]{result.get(complement),i};
+      }
+      map.put(nums[i],i  )
+    }
+}
