@@ -1,0 +1,33 @@
+//Day -2
+// Add two Number
+//Method: while solving the linked list problem keeping the anchor point "intialNode" and current node"head" are important , in the while loop check the nodes are null or not 
+// and then iterativly add the value of node and check for carry on value and update the nodes to next node and update the move the head to the next value 
+// and also handle the last carry value.
+
+code:
+public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        
+        ListNode tempHead = new ListNode(0);
+        ListNode current = tempHead;
+        int carry =0;
+
+        while(l1!= null || l2!=null){
+            int x= (l1!=null)? l1.val:0;
+            int y= (l2!=null)?l2.val:0;
+
+            int sum = carry+x+y;
+            carry = sum/10;
+            current.next = new ListNode(sum % 10);
+            current = current.next;
+
+            if (l1 != null) l1 = l1.next;
+            if (l2 != null) l2 = l2.next;
+        }
+
+
+        if (carry > 0) {
+            current.next = new ListNode(carry);
+        }
+
+        return tempHead.next;
+    }
