@@ -13,6 +13,16 @@
 //
 // Time Complexity: O(n)
 // Space Complexity: O(min(n, m)) → where m is the character set size (e.g., 26 for lowercase, 128 for ASCII)
+//You use two pointers:
+//how to implement sliding window
+// left (👈 where the window starts)
+// right (👉 where the window ends)
+
+// You expand the window by moving right ➡️
+
+// You shrink the window by moving left ➡️ when needed (e.g. if there's a repeat)
+
+// You check or update something inside the window — like the sum, max length, or count
 
 public int lengthOfLongestSubstring(String s) {
     Set<Character> seen = new HashSet<>();
