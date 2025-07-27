@@ -1,22 +1,32 @@
 // Day -3
 // Longest Substring Without Repeating Characters
-// Method: Use the sliding window technique with two pointers (left and right).
-// Maintain an integer array of size 128 (for ASCII characters) to store the last seen index (+1) of each character.
-// While traversing the string, check if the current character was seen inside the current window.
-// If it was, update the left pointer to the last seen position of that character (to remove the duplicate).
-// Calculate the current window length as (right - left + 1) and update the maximum length seen so far.
-// Update the last seen index of the current character to right + 1.
-// This approach ensures each character is visited at most twice, giving O(n) time complexity with O(1) space usage (for ASCII only).
+// Method: Sliding Window with HashSet
+//
+// Use two pointers, `left` and `right`, to create a dynamic window that expands to include
+// unique characters and shrinks when a duplicate is found.
+// A HashSet is used to store the characters currently in the window.
+// - If the character at `right` is not in the set, add it and update the max length.
+// - If it is already in the set, move the `left` pointer forward and remove characters
+//   until the duplicate is gone.
+// This approach ensures each character is processed at most twice (added and removed),
+// giving an efficient O(n) time complexity.
+//
+// Time Complexity: O(n)
+// Space Complexity: O(min(n, m)) → where m is the character set size (e.g., 26 for lowercase, 128 for ASCII)
 
 public int lengthOfLongestSubstring(String s) {
-    int[] index = new int[128]; // ASCII size
-    int maxLen = 0;
-    
-    for (int left = 0, right = 0; right < s.length(); right++) {
-        char current = s.charAt(right);
-        left = Math.max(index[current], left);
+    Set<Character> seen = new HashSet<>();
+    int left = 0, right = 0, maxLen = 0;
+
+    while (right < s.length()) {
+        char currentChar = s.charAt(right);
+        while (seen.contains(currentChar)) {
+            seen.remove(s.charAt(left));
+            left++;
+        }
+        seen.add(currentChar);
         maxLen = Math.max(maxLen, right - left + 1);
-        index[current] = right + 1; // store the next index to avoid repeat
+        right++;
     }
 
     return maxLen;
