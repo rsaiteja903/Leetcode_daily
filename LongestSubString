@@ -1,0 +1,23 @@
+// Day -3
+// Longest Substring Without Repeating Characters
+// Method: Use the sliding window technique with two pointers (left and right).
+// Maintain an integer array of size 128 (for ASCII characters) to store the last seen index (+1) of each character.
+// While traversing the string, check if the current character was seen inside the current window.
+// If it was, update the left pointer to the last seen position of that character (to remove the duplicate).
+// Calculate the current window length as (right - left + 1) and update the maximum length seen so far.
+// Update the last seen index of the current character to right + 1.
+// This approach ensures each character is visited at most twice, giving O(n) time complexity with O(1) space usage (for ASCII only).
+
+public int lengthOfLongestSubstring(String s) {
+    int[] index = new int[128]; // ASCII size
+    int maxLen = 0;
+    
+    for (int left = 0, right = 0; right < s.length(); right++) {
+        char current = s.charAt(right);
+        left = Math.max(index[current], left);
+        maxLen = Math.max(maxLen, right - left + 1);
+        index[current] = right + 1; // store the next index to avoid repeat
+    }
+
+    return maxLen;
+}
